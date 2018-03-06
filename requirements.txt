@@ -11,5 +11,4 @@ Flask-Migrate
 Flask-Script
 Flask-WTF
 Flask-SQLAlchemy
-Flask-Script
 psycopg2

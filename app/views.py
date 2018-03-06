@@ -4,10 +4,14 @@ Jinja2 Documentation:    http://jinja.pocoo.org/2/documentation/
 Werkzeug Documentation:  http://werkzeug.pocoo.org/documentation/
 This file creates your application.
 """
-
+import os
 from app import app
-from flask import render_template, request, redirect, url_for, flash
+from flask import render_template, request, redirect, url_for, flash, session, abort
+from werkzeug.utils import secure_filename
 
+# Note: that when using Flask-WTF we need to import the Form Class that we created
+# in forms.py
+from forms import MyForm, PhotoForm
 
 ###
 # Routing for your application.
@@ -17,13 +21,43 @@ from flask import render_template, request, redirect, url_for, flash
 def home():
     """Render website's home page."""
     return render_template('home.html')
-
-
+   
 @app.route('/about/')
 def about():
     """Render the website's about page."""
-    return render_template('about.html', name="Mary Jane")
+    return render_template('about.html')
+    
+@app.route('/profile', methods=['GET', 'POST'])
+def profile():
+    myform = MyForm()
+    
+    if request.method == 'POST':
+        if myform.validate_on_submit():
+        
+            firstname = myform.firstname.data
+            lastname = myform.lastname.data
+            email = myform.email.data
+            location = myform.location.data
+            biography = myform.biography.data
+            gender = myform.gender.data
 
+            flash('Profile successfully added!', 'success')
+            return render_template('profiles.html')
+
+        flash_errors(myform)
+    return render_template('profile.html', form=myform)
+  
+
+@app.route('/profiles')
+def profiles():
+    """Render the website's profiles page."""
+    return render_template('profiles.html')     
+    
+@app.route('/profile/<userid>')
+def profile_userid():
+    """Render the website's profile/<userid> page."""
+    return render_template('profile_userid.html')   
+    
 
 ###
 # The functions below should be applicable to all Flask apps.
@@ -35,6 +69,13 @@ def send_text_file(file_name):
     file_dot_text = file_name + '.txt'
     return app.send_static_file(file_dot_text)
 
+def flash_errors(form):
+    for field, errors in form.errors.items():
+        for error in errors:
+            flash(u"Error in the %s field - %s" % (
+                getattr(form, field).label.text,
+                error
+            ), 'danger')
 
 @app.after_request
 def add_header(response):

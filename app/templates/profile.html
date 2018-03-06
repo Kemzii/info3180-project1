@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block css %}
+
+<link href="{{ url_for('static', filename='css/@#$%^&^%$#@$%$^%&*%&$#^@%!$%.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block main %}
+
+<div class="head">
+           
+<h1>Add Profile</h1>
+
+</div>
+
+<div class="container">
+  <form method="POST" action="{{ url_for('profile') }}" enctype="multipart/form-data">
+      {% include 'flash_messages.html' %}
+</div>
+    
+    {{ form.csrf_token }}
+    {{ form.firstname.label (class_="title")  }} <p> First Name </p>{{ form.firstname(size=20) }}
+    <br>
+    <br>
+     {{ form.lastname.label (class_="title")  }} <p> Last Name </p>{{ form.lastname(size=20) }}
+    <br>
+    <br>
+    {{ form.gender.label (class_="title" (placeholder="Select Gender")) }}
+    <p> Gender</p>
+    {{ form.gender }}
+    <br>
+    <br>
+    {{ form.email.label (class_="title" (placeholder="jdoe@example.com")) }}
+    <p> Email</p>
+    {{ form.email }}
+    <br>
+    <br>
+    {{ form.location.label (class_="title" (placeholder="e.g. Kingston, Jamaica")) }}
+    <p> Location </p>
+    {{ form.location }}
+    <br>
+    <br>
+    {{ form.biography.label (class_="title") }}
+    <p>Biography</p>
+    {{ form.biography }}
+    <br>
+    <br>
+    {{ form.photo.label }}
+    {{ form.photo }}
+
+    <button>Browse...</button>
+    
+    <input type="submit" value="Add Profile" class='button'/>
+   
+  </form>
+
+{% endblock %}
