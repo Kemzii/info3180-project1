@@ -4,14 +4,14 @@ Jinja2 Documentation:    http://jinja.pocoo.org/2/documentation/
 Werkzeug Documentation:  http://werkzeug.pocoo.org/documentation/
 This file creates your application.
 """
-import os
-from app import app
+import os, uuid, time
+from app import app, db, login_manager
 from flask import render_template, request, redirect, url_for, flash, session, abort
 from werkzeug.utils import secure_filename
 
 # Note: that when using Flask-WTF we need to import the Form Class that we created
 # in forms.py
-from forms import MyForm, PhotoForm
+from forms import MyForm
 
 ###
 # Routing for your application.
@@ -40,6 +40,22 @@ def profile():
             location = myform.location.data
             biography = myform.biography.data
             gender = myform.gender.data
+            photo = myform.photo.data
+           
+            filename = secure_filename(photo.filename)
+            photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            
+            userid = uuid.uuid4()
+            created_on = format_date_joined()
+            
+            db = connect_db()
+            cur = db.cursor()
+            cur.execute('insert into users (name, email) values (%s, %s)', (request.form['name'], request.form['email']))
+            db.commit()
+            flash('New user was successfully added')
+            
+            
+            
 
             flash('Profile successfully added!', 'success')
             return render_template('profiles.html')
@@ -58,6 +74,13 @@ def profile_userid():
     """Render the website's profile/<userid> page."""
     return render_template('profile_userid.html')   
     
+
+def format_date_joined():
+    """format date"""
+    dtime = time.strftime("%d %b %y")
+    return dtime
+
+
 
 ###
 # The functions below should be applicable to all Flask apps.
