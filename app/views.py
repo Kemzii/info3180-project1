@@ -49,13 +49,17 @@ def profile():
             userid = str(uuid.uuid4())
             created_on = format_date_joined()
             
-            db = connect_db()
-            cur = db.cursor()
-            query = "insert into Profiles (firstname, lastname, email, location, biography, gender, photo, userid, created_on) values (%s, %s, %s, %s, %s, %s, %s, %s, %s);"
-            data = (firstname, lastname, email, location, biography, gender, filename, userid, created_on)
-            cur.execute(query, data)
-            db.commit()
-
+            #db = connect_db()
+            #cur = db.cursor()
+            #query = "insert into Profiles (firstname, lastname, email, location, biography, gender, photo, userid, created_on) values (%s, %s, %s, %s, %s, %s, %s, %s, %s);"
+            #data = (firstname, lastname, email, location, biography, gender, filename, userid, created_on)
+            #cur.execute(query, data)
+            #db.commit()
+            
+            new_profile = FormData(firstname=firstname, lastname=lastname, email=email, location=location, biography=biography, gender=gender, photo=filename, userid=userid, created_on=created_on)
+            db.session.add(new_profile)
+            db.session.commit()
+            
             flash('Profile successfully added!', 'success')
             return redirect(url_for("profiles"))
 
