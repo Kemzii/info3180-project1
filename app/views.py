@@ -90,7 +90,7 @@ def format_date_joined():
     return dtime
 
 def connect_db():
-    return psycopg2.connect(host="localhost",database="formdatabase", user="project1", password="testpass") 
+    return psycopg2.connect(host="ec2-23-21-217-27.compute-1.amazonaws.com",database="dfhol0n5d8ti0p", user="oyzjdjrswjhfes", password="90c3f0501321f13e0c4e7222cfcb4fecc6d590e947202a0309f94313ea72dd36") 
 
 
 ###
