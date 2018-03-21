@@ -7,7 +7,7 @@ app.config['SECRET_KEY'] = 'KYZX234'
 app.config['UPLOAD_FOLDER'] = "./app/static/uploads"
 
 #app.config['SQLALCHEMY_DATABASE_URI'] =  "postgresql://project1:testpass@localhost/formdatabase"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://oyzjdjrswjhfes:90c3f0501321f13e0c4e7222cfcb4fecc6d590e947202a0309f94313ea72dd36@ec2-23-21-217-27.compute-1.amazonaws.com:5432/dfhol0n5d8ti0p'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://oyzjdjrswjhfes:90c3f0501321f13e0c4e7222cfcb4fecc6d590e947202a0309f94313ea72dd36@ec2-23-21-217-27.compute-1.amazonaws.com:5432/dfhol0n5d8ti0p'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True # added just to suppress a warning
 
 db = SQLAlchemy(app)
