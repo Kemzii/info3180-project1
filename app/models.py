@@ -2,6 +2,8 @@ from . import db
 
 
 class FormData(db.Model):
+    __tablename__ = 'profiles'
+    
     userid = db.Column(db.Integer, primary_key=True)
     firstname = db.Column(db.String(80))
     lastname = db.Column(db.String(80))
@@ -9,7 +11,9 @@ class FormData(db.Model):
     location = db.Column(db.String(80))
     biography = db.Column(db.String(80))
     gender = db.Column(db.String(80))
-    photo = db.Column(db.bytea(255))
+    photo = db.Column(db.String(255))
+    created_on = db.Column(db.String(80))
+    
     
     def is_authenticated(self):
         return True
