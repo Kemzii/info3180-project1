@@ -16,15 +16,15 @@
         <hr class="top"/>
         
         <ul>
-            <img id= 'image' src ="{{ url_for('static', filename='uploads/'+profile[0]) }}"></img>
+            <img id= 'image' src ="{{ url_for('static', filename='uploads/'+profile.photo) }}"></img>
             <div class="info">
 
-            <span class="name">{{ profile[1] }} {{ profile[2] }}</span><br>
-            {{ profile[3] }} <br>
-            {{ profile[4] }}
+            <span class="name">{{ profile.firstname }} {{ profile.lastname }}</span><br>
+            {{ profile.gender }} <br>
+            {{ profile.location }}
             <div class="view_btn">
             <form>
-            <input id ="view_button" class='btn btn-primary' type="button" value="View Profile" onclick="window.location.href='/profile/{{ profile[5] }}'" />
+            <input id ="view_button" class='btn btn-primary' type="button" value="View Profile" onclick="window.location.href='/profile/{{ profile.userid }}'" />
             </form> 
             </div>
             </div>

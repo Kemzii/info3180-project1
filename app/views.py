@@ -67,10 +67,12 @@ def profile():
 def profiles():
     """Render the website's profiles page."""
     
-    db = connect_db()
-    cur = db.cursor()
-    cur.execute('select photo, firstname, lastname, gender, location, userid from profiles')
-    profiles = cur.fetchall()
+    #db = connect_db()
+    #cur = db.cursor()
+    #cur.execute('select photo, firstname, lastname, gender, location, userid from profiles')
+    #profiles = cur.fetchall()
+    
+    profiles = FormData.query.all()
     
     return render_template('profiles.html', profiles=profiles)    
     
