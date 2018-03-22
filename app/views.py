@@ -4,7 +4,7 @@ Jinja2 Documentation:    http://jinja.pocoo.org/2/documentation/
 Werkzeug Documentation:  http://werkzeug.pocoo.org/documentation/
 This file creates your application.
 """
-import os, uuid, time, psycopg2
+import os, uuid, time, psycopg2, random
 from app import app, db, login_manager
 from flask import render_template, request, redirect, url_for, flash, session, abort
 from werkzeug.utils import secure_filename
@@ -46,7 +46,7 @@ def profile():
             filename = secure_filename(photo.filename)
             photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             
-            userid = ('str(uuid.uuid4())')
+            userid = random.getrandbits(16) #str(uuid.uuid4())
             created_on = format_date_joined()
             
             #db = connect_db()
