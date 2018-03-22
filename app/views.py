@@ -46,7 +46,7 @@ def profile():
             filename = secure_filename(photo.filename)
             photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             
-            userid = str(uuid.uuid4())
+            userid = 5 #str(uuid.uuid4())
             created_on = format_date_joined()
             
             #db = connect_db()
@@ -56,7 +56,7 @@ def profile():
             #cur.execute(query, data)
             #db.commit()
             
-            new_profile = FormData(firstname=firstname, lastname=lastname, email=email, location=location, biography=biography, gender=gender, photo=filename, created_on=created_on)
+            new_profile = FormData(firstname=firstname, lastname=lastname, email=email, location=location, biography=biography, gender=gender, photo=filename, userid=userid, created_on=created_on)
             db.session.add(new_profile)
             db.session.commit()
             
