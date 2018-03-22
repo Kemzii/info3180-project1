@@ -4,7 +4,7 @@ from . import db
 class FormData(db.Model):
     __tablename__ = 'profiles'
     
-    userid = db.Column(db.Integer, primary_key=True)
+    userid = db.Column(db.String(255), primary_key=True)
     firstname = db.Column(db.String(80))
     lastname = db.Column(db.String(80))
     email = db.Column(db.String(80))
