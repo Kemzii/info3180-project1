@@ -56,7 +56,7 @@ def profile():
             #cur.execute(query, data)
             #db.commit()
             
-            new_profile = FormData(firstname=firstname, lastname=lastname, email=email, location=location, biography=biography, gender=gender, photo=filename, userid=userid, created_on=created_on)
+            new_profile = FormData(firstname=firstname, lastname=lastname, email=email, location=location, biography=biography, gender=gender, photo=filename, created_on=created_on)
             db.session.add(new_profile)
             db.session.commit()
             
